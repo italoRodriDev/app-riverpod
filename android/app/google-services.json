@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "696452882316",
+    "firebase_url": "https://soquentetech-default-rtdb.firebaseio.com",
+    "project_id": "soquentetech",
+    "storage_bucket": "soquentetech.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696452882316:android:aea985d0d0a843f6d980a9",
+        "android_client_info": {
+          "package_name": "com.example.app_riverpod"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3WWTpIVHr6zwB-l_xTLBd9-R2ty8prH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

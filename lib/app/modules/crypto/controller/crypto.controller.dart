@@ -6,6 +6,8 @@ import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+const myPss = '123456';
+
 class CryptoController {
   TextEditingController editText = TextEditingController();
   TextEditingController editPassword = TextEditingController();
@@ -33,26 +35,30 @@ class CryptoController {
     return iv.base64 + ':' + encrypted.base64;
   }
 
-// -> Descriptografar mensagem
+  // -> Descriptografar mensagem
   String decryptText(String encryptedWithIv, String password) {
-    // Separa IV e ciphertext
-    final parts = encryptedWithIv.split(':');
-    if (parts.length != 2) {
-      throw FormatException("Formato inválido. Deve ser 'IV:ciphertext'");
+    try {
+      // Separa IV e ciphertext
+      final parts = encryptedWithIv.split(':');
+      if (parts.length != 2) {
+        throw FormatException("Formato inválido. Deve ser 'IV:ciphertext'");
+      }
+
+      final iv = encrypt.IV.fromBase64(parts[0]);
+      final encrypted = parts[1];
+
+      // Deriva a chave SHA-256 a partir da senha
+      final key = encrypt.Key(
+          Uint8List.fromList(sha256.convert(utf8.encode(password)).bytes));
+
+      // Cria o encrypter AES-256 CBC
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+      // Descriptografa
+      return encrypter.decrypt64(normalizeBase64(encrypted), iv: iv);
+    } catch (e) {
+      return 'Acesso negado, Senha inválida'; // ou null, dependendo de como você quer tratar
     }
-
-    final iv = encrypt.IV.fromBase64(parts[0]);
-    final encrypted = parts[1];
-
-    // Deriva a chave SHA-256 a partir da senha
-    final key = encrypt.Key(
-        Uint8List.fromList(sha256.convert(utf8.encode(password)).bytes));
-
-    // Cria o encrypter AES-256 CBC
-    final encrypter = encrypt.Encrypter(encrypt.AES(key));
-
-    // Descriptografa
-    return encrypter.decrypt64(normalizeBase64(encrypted), iv: iv);
   }
 
   String normalizeBase64(String base64Str) {
@@ -73,7 +79,7 @@ class CryptoController {
 
   sendMessage() {
     if (editText.text.isNotEmpty) {
-      final encrypted = encryptText(editText.text, '123456');
+      final encrypted = encryptText(editText.text, myPss);
       print(encrypted);
       messageEncrypted.value = encrypted;
     }

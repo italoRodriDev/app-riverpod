@@ -1,5 +1,5 @@
 import 'package:ProjetoTeste/app/config/colors/colors.dart';
-import 'package:ProjetoTeste/app/modules/crypto/controller/cripto.controller.dart';
+import 'package:ProjetoTeste/app/modules/crypto/controller/crypto.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crise/components/button.component.dart';
 import 'package:flutter_crise/components/input-text.component.dart';
@@ -23,7 +23,7 @@ class _CryptoScreenState extends ConsumerState<CryptoScreen> {
             child: Scaffold(
           appBar: AppBar(
               title: TextComponent(
-            value: 'Chat com criptografia - by Italo. Rodry',
+            value: 'Chat com criptografia - by Italo Rodri.',
             fontSize: 18,
             fontWeight: FontWeight.w600,
           )),
@@ -34,7 +34,7 @@ class _CryptoScreenState extends ConsumerState<CryptoScreen> {
               children: [
                 TextComponent(
                     value:
-                        'Sua mensagem é criptografada de ponta a ponta, tornando totalmente confidencial',
+                        'Sua mensagem é criptografada de ponta a ponta, garantindo total confidencialidade.',
                     textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 InputTextComponent(
@@ -82,7 +82,7 @@ class _CryptoScreenState extends ConsumerState<CryptoScreen> {
                           children: [
                             TextComponent(
                                 value:
-                                    'Você recebeu uma mensagem digite a senha para descriptografar',
+                                    'Você tem uma nova mensagem \n Insira sua senha para descriptografá‑la.',
                                 textAlign: TextAlign.center),
                             const SizedBox(height: 10),
                             InputTextComponent(
